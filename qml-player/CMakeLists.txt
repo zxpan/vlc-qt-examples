@@ -6,6 +6,8 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.0.2)
 CMAKE_POLICY(VERSION 3.0.2)
 
+#set(CMAKE_FIND_DEBUG_MODE TRUE)
+
 PROJECT(qml-player VERSION 1.0.0)
 
 CONFIGURE_FILE(
@@ -49,16 +51,25 @@ IF(MSVC)
 ENDIF()
 
 # Find Qt
-FIND_PACKAGE(Qt5 5.2.0 REQUIRED COMPONENTS Quick)
+#FIND_PACKAGE(Qt5 5.2.0 REQUIRED COMPONENTS Quick)
+FIND_PACKAGE(Qt6 6.2.4 REQUIRED COMPONENTS Quick)
+find_package(Qt6 6.2.4 REQUIRED COMPONENTS OpenGL)
+message(status " Qt6 ${Qt6_FOUND}, ${Qt6Quick_LIBRARIES}")
 
+set(CMAKE_FIND_DEBUG_MODE TRUE)
 # Add additional libraries
-FIND_PACKAGE(VLCQt REQUIRED COMPONENTS Qml)
+#SET(VLCQt_ROOT "/Users/zhengxiangpan/project/vlc-qt/build/package/VLCQt")
+message(status " root ${VLCQt_ROOT}")
+FIND_PACKAGE(VLCQt REQUIRED COMPONENTS Qml PATHS /Users/zhengxiangpan/project/vlc-qt6-install/lib/cmake/VLCQt)
+message(status "VLCQt found Qml: ${VLCQt-FOUND}, ${VLCQt_CONFIG}, ${CMAKE_PREFIX_PATH}")
+set(CMAKE_FIND_DEBUG_MODE FALSE)
 
 # Set Qt bin dir to find QtCore*.dll and other libs to install
 STRING(REGEX REPLACE "([^ ]+)[/\\].*" "\\1" QT_BIN_DIR_TMP "${QT_MOC_EXECUTABLE}")
 STRING(REGEX REPLACE "\\\\" "/" QT_BIN_DIR "${QT_BIN_DIR_TMP}")  # Replace back slashes to slashes
 STRING(REGEX REPLACE "bin" "lib" QT_LIB_DIR "${QT_BIN_DIR}")
 
+message(status " CMAKE_SYSTEM_NAME=${CMAKE_SYSTEM_NAME}")
 # Set default install path:
 # In *nix environments this is /usr/local
 # Under M$ Windows this is C:\Program files\${PROJECT_NAME}

@@ -17,8 +17,20 @@ SET(Project_Srcs
 # Define the resource files
 SET(Project_Resources
     qml/qml.qrc
+#    qml/shaders/videomaterial.vert.qsb
+#    qml/shaders/videomaterial.frag.qsb
 )
 
+#qt6_add_shaders(PROJECT_NAME "shaders"
+#    BATCHABLE
+#    PRECOMPILE
+#    OPTIMIZED
+#    PREFIX
+#        "/qml"
+#    FILES
+#        "shaders/mandelbrot.vert"
+#        "shaders/mandelbrot.frag"
+#)
 
 #
 # Compiler settings
@@ -69,7 +81,8 @@ IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 ENDIF()
 
 # Here the needed Qt Libraries are added to the link command.
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} Qt5::Quick VLCQt::Qml)
+#TARGET_LINK_LIBRARIES(${PROJECT_NAME} Qt5::Quick VLCQt::Qml)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} Qt6::Quick VLCQt::Qml)
 
 
 #

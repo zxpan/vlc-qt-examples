@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/qml">
         <file>video.qml</file>
+        <file>shaders/videomaterial.vert.qsb</file>
+        <file>shaders/videomaterial.frag.qsb</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>

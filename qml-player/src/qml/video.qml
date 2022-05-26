@@ -4,16 +4,21 @@
 */
 
 import QtQuick 2.0
-import VLCQt 1.0
+import VLCQt 1.1
 
 Rectangle {
     width: 640
-    height: 480
+    height: 360
     color: "black"
 
-    VlcVideoPlayer {
-        id: vidwidget
+    VlcPlayer {
+        id: player
+        logLevel : Vlc.DebugLevel
+        url: "https://m4n8c9r5.map2.ssl.hwcdn.net/videos/content/2817383/clip.mp4"
+    }
+    VlcVideoOutput {
+        id: video
+        source: player
         anchors.fill: parent
-        url: "http://videos.hd-trailers.net/e23ab4b8-a737-46dd-a0e4-259ba36056b6_YsfXbEghC5XywlmkKiYrF0D1oWcPYHA94aPeKmTuUKJJVJBpH4AFbPzcNWMhAJHuRnKZAAatvKg-_8_0.mp4"
     }
 }
